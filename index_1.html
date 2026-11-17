@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Francisco Castillo Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Figtree:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Palette: cool paper + ink, one cobalt accent. Layout: left-aligned editorial column, 12-col grid for projects. */
+  --bg:#eef0f3;
+  --surface:#ffffff;
+  --surface-2:#e3e6eb;
+  --ink:#0d1117;
+  --ink-2:#4a5160;
+  --line:#cfd4dc;
+  --accent:#2437f2;
+  --accent-ink:#ffffff;
+  --accent-soft:#dfe3ff;
+  --display:"Bricolage Grotesque", "Arial Narrow", Impact, sans-serif;
+  --body:"Figtree", "Helvetica Neue", Arial, sans-serif;
+  --radius:18px;
+  --max:1180px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0d12;--surface:#141821;--surface-2:#1c212c;--ink:#eceef3;--ink-2:#9aa3b5;--line:#2a3140;
+    --accent:#6f7dff;--accent-ink:#0b0d12;--accent-soft:#1b2150;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0d12;--surface:#141821;--surface-2:#1c212c;--ink:#eceef3;--ink-2:#9aa3b5;--line:#2a3140;
+  --accent:#6f7dff;--accent-ink:#0b0d12;--accent-soft:#1b2150;color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.02;letter-spacing:-0.02em}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:600;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);display:inline-block}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.logo{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-0.03em;display:flex;align-items:center;gap:8px}
+.logo i{width:10px;height:10px;background:var(--accent);border-radius:2px;display:inline-block;transform:rotate(45deg)}
+.links{display:flex;gap:26px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.links a:hover{color:var(--ink)}
+.ctrls{display:flex;gap:8px;align-items:center}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600;background:var(--surface);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+.pill:hover{border-color:var(--ink)}
+.pill.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media (max-width:760px){.links{display:none}}
+
+/* HERO */
+.hero{padding:clamp(56px,9vw,120px) 0 clamp(40px,6vw,72px);position:relative}
+.hero .grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:end}
+.hero h1{font-size:clamp(46px,8.2vw,112px);font-weight:800;line-height:.95}
+.hero h1 .thin{font-weight:300;display:block}
+.rot{display:inline-block;color:var(--accent);position:relative;min-width:1ch}
+.rot span{display:inline-block;animation:drop .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes drop{from{opacity:0;transform:translateY(.4em) skewY(3deg)}to{opacity:1;transform:none}}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:52ch;margin-top:28px}
+.hero-side{display:flex;flex-direction:column;gap:14px;padding-bottom:6px}
+.fact{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:12px 0;font-size:14px}
+.fact b{font-weight:700}
+.fact span{color:var(--ink-2);text-align:right}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid var(--ink);transition:.25s}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:translateY(-2px)}
+.btn.ghost:hover{background:var(--surface);transform:translateY(-2px)}
+.btn svg{width:16px;height:16px}
+@media (max-width:860px){.hero .grid{grid-template-columns:1fr;gap:28px}}
+
+/* MARQUEE */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:14px 0;background:var(--surface)}
+.track{display:flex;gap:40px;width:max-content;animation:scroll 38s linear infinite;font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink-2)}
+.track span::after{content:"◆";color:var(--accent);margin-left:40px;font-size:9px;vertical-align:middle}
+@keyframes scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.track{animation:none}.rot span{animation:none}}
+
+/* SECTIONS */
+section{padding:clamp(56px,8vw,110px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(34px,5vw,64px);font-weight:700}
+.sec-head p{color:var(--ink-2);max-width:44ch}
+
+/* FILTERS */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+
+/* PROJECT GRID */
+.projects{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 4;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,opacity .3s;cursor:pointer;text-align:left}
+.card.wide{grid-column:span 8}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(0,0,0,.35);border-color:var(--ink-2)}
+.card.hide{display:none}
+.thumb{aspect-ratio:16/10;position:relative;overflow:hidden;background:var(--surface-2);display:flex;align-items:end;padding:18px}
+.thumb::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 80% at 100% 0%,var(--h1) 0%,transparent 55%),
+  radial-gradient(90% 90% at 0% 100%,var(--h2) 0%,transparent 60%);opacity:.9;transition:transform .6s}
+.card:hover .thumb::before{transform:scale(1.08)}
+.thumb .big{position:absolute;right:14px;top:6px;font-family:var(--display);font-weight:800;font-size:clamp(72px,9vw,120px);line-height:1;color:var(--ink);opacity:.08;letter-spacing:-0.05em}
+.thumb .mark{position:relative;font-family:var(--display);font-weight:800;font-size:clamp(22px,2.4vw,32px);line-height:1;color:var(--ink);letter-spacing:-0.03em;max-width:85%}
+.card.wide .thumb{aspect-ratio:16/7.5}
+.tag{position:absolute;top:14px;left:14px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:5px 9px;border-radius:999px}
+.tag.ai{background:var(--accent);color:var(--accent-ink)}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.body h3{font-size:19px;font-weight:700;letter-spacing:-0.01em}
+.body p{font-size:14.5px;color:var(--ink-2)}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;font-size:12.5px;color:var(--ink-2);font-weight:600}
+.meta .open{color:var(--accent);display:inline-flex;align-items:center;gap:6px}
+.meta .open::after{content:"→";transition:.2s}
+.card:hover .meta .open::after{transform:translateX(4px)}
+@media (max-width:980px){.card,.card.wide{grid-column:span 6}}
+@media (max-width:640px){.card,.card.wide{grid-column:span 12}}
+
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.scrim{position:absolute;inset:0;background:rgba(5,7,12,.6);backdrop-filter:blur(6px)}
+.sheet{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:24px;max-width:860px;width:100%;max-height:90vh;overflow:auto;padding:clamp(22px,4vw,44px);animation:up .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.sheet .x{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:18px;background:var(--surface)}
+.sheet .x:hover{background:var(--ink);color:var(--bg)}
+.sheet h3{font-size:clamp(28px,4vw,44px);font-weight:700;margin:10px 0 6px}
+.sheet .sub{color:var(--ink-2);font-size:16px;margin-bottom:22px}
+.sheet .cols{display:grid;grid-template-columns:1.5fr 1fr;gap:28px}
+.sheet h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px;font-weight:700}
+.sheet ul{list-style:none;display:flex;flex-direction:column;gap:9px;font-size:15px}
+.sheet ul li{padding-left:18px;position:relative}
+.sheet ul li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;background:var(--accent);border-radius:2px;transform:rotate(45deg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:var(--surface-2)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 22px}
+.kpi{background:var(--surface-2);border-radius:14px;padding:12px 14px}
+.kpi b{font-family:var(--display);font-size:26px;font-weight:800;display:block;line-height:1;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--ink-2);font-weight:600}
+.note{margin-top:22px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:13.5px;color:var(--ink-2)}
+@media (max-width:700px){.sheet .cols{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
+
+/* ABOUT */
+.about .grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
+.about .big-p{font-family:var(--display);font-size:clamp(24px,3vw,38px);font-weight:500;line-height:1.2;letter-spacing:-0.02em}
+.about .big-p em{font-style:normal;color:var(--accent)}
+.about .text{display:flex;flex-direction:column;gap:16px;color:var(--ink-2);font-size:16.5px;max-width:60ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.stat{border-top:2px solid var(--ink);padding-top:10px}
+.stat b{font-family:var(--display);font-size:clamp(30px,4vw,44px);font-weight:800;line-height:1;display:block;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--ink-2);font-weight:600}
+@media (max-width:860px){.about .grid{grid-template-columns:1fr;gap:28px}}
+
+/* SKILLS */
+.skills .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sk{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.sk h3{font-size:20px;margin:14px 0 12px}
+.sk .num{font-family:var(--display);font-weight:800;color:var(--accent);font-size:14px;letter-spacing:.06em}
+.sk ul{list-style:none;display:flex;flex-direction:column;gap:7px;font-size:14.5px;color:var(--ink-2)}
+.tools{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px}
+.tool{border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:14px;font-weight:600;background:var(--surface);transition:.2s}
+.tool:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.tool.ai::before{content:"AI";font-size:9px;background:var(--accent);color:var(--accent-ink);padding:2px 5px;border-radius:4px;margin-right:7px;vertical-align:middle;letter-spacing:.08em}
+@media (max-width:860px){.skills .grid{grid-template-columns:1fr}}
+
+/* TIMELINE */
+.tl{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.tl h3.col{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:18px;font-family:var(--body);font-weight:700}
+.item{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
+.item .when{font-size:13px;color:var(--ink-2);font-weight:600;padding-top:3px;font-variant-numeric:tabular-nums}
+.item b{display:block;font-size:17px;font-weight:700}
+.item .org{color:var(--accent);font-weight:600;font-size:14px}
+.item p{color:var(--ink-2);font-size:14.5px;margin-top:6px}
+@media (max-width:860px){.tl{grid-template-columns:1fr}}
+
+/* CONTACT */
+.contact{padding-bottom:40px}
+.ct{background:var(--ink);color:var(--bg);border-radius:28px;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;position:relative;overflow:hidden}
+.ct::after{content:"";position:absolute;width:520px;height:520px;right:-180px;top:-220px;border-radius:50%;background:var(--accent);filter:blur(90px);opacity:.55}
+.ct>*{position:relative}
+.ct h2{font-size:clamp(36px,6vw,80px);font-weight:800}
+.ct p{opacity:.75;max-width:40ch;margin-top:12px}
+.ct .list{display:flex;flex-direction:column;gap:10px}
+.ct .list a{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.18);padding:12px 0;font-weight:600;transition:.2s}
+.ct .list a:hover{padding-left:8px}
+.ct .list small{opacity:.6;font-weight:500}
+@media (max-width:760px){.ct{grid-template-columns:1fr}}
+footer{padding:28px 0 48px;font-size:13px;color:var(--ink-2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* REVEAL */
+.rv{opacity:1;transform:none;transition:opacity .7s,transform .7s}
+.rv.pre{opacity:0;transform:translateY(22px)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><i></i>Francisco Castillo</a>
+    <div class="links">
+      <a href="#proyectos" data-i="nav.work">Proyectos</a>
+      <a href="#sobre" data-i="nav.about">Sobre mí</a>
+      <a href="#skills" data-i="nav.skills">Habilidades</a>
+      <a href="#exp" data-i="nav.exp">Trayectoria</a>
+      <a href="#contacto" data-i="nav.contact">Contacto</a>
+    </div>
+    <div class="ctrls">
+      <button class="pill" id="lang" aria-label="Cambiar idioma">ES / <span style="opacity:.5">EN</span></button>
+      <button class="pill" id="theme" aria-label="Cambiar tema">◐</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <p class="eyebrow" data-i="hero.eyebrow">Marketing digital · Contenido · IA creativa</p>
+        <h1 style="margin-top:22px">
+          <span class="thin" data-i="hero.l1">Ideas que se</span>
+          <span data-i="hero.l2">convierten en</span>
+          <span class="rot" id="rot"><span>contenido</span></span>
+        </h1>
+        <p class="lead" data-i="hero.lead">Soy Francisco Castillo, estudiante de último curso de Marketing en York St John University y creador de estrategias de redes sociales, branding y vídeo con IA para marcas reales. De Granada a York, con la misma obsesión: que cada pieza tenga un porqué.</p>
+        <div class="cta">
+          <a class="btn primary" href="#proyectos"><span data-i="hero.cta1">Ver proyectos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn ghost" href="#contacto" data-i="hero.cta2">Hablemos</a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="fact"><b data-i="f.base">Base</b><span>York, UK · Granada, ES</span></div>
+        <div class="fact"><b data-i="f.focus">Foco</b><span data-i="f.focusv">Social media, branding, vídeo IA</span></div>
+        <div class="fact"><b data-i="f.langs">Idiomas</b><span data-i="f.langsv">Español nativo · Inglés B2</span></div>
+        <div class="fact"><b data-i="f.status">Disponible</b><span data-i="f.statusv">Prácticas y junior en marketing</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="track"></div>
+</div>
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow" data-i="work.eyebrow">Trabajo seleccionado</p>
+        <h2 style="margin-top:12px" data-i="work.title">Proyectos</h2>
+      </div>
+      <p data-i="work.intro">Propuestas para negocios reales, campañas académicas y experimentos con IA. Pulsa en cualquier ficha para ver el proceso.</p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="projects" id="grid"></div>
+  </div>
+</section>
+
+<section id="sobre" class="about" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="grid">
+      <div class="rv">
+        <p class="eyebrow" data-i="about.eyebrow">Sobre mí</p>
+        <p class="big-p" style="margin-top:18px" data-i="about.big">Me interesa el marketing que se puede <em>ver, medir y sentir</em>: una estrategia que acaba en contenido publicado, no en un PDF guardado.</p>
+        <div class="stats">
+          <div class="stat"><b data-count="15">0</b><span data-i="st.1">proyectos de marca</span></div>
+          <div class="stat"><b data-count="3">0</b><span data-i="st.2">negocios reales asesorados</span></div>
+          <div class="stat"><b data-count="9">0</b><span data-i="st.3">herramientas de IA en uso</span></div>
+        </div>
+      </div>
+      <div class="text rv">
+        <p data-i="about.p1">Empecé en el sector hotelero con Eurostars, donde aprendí a tratar con clientes antes que a escribir copies. Después vino el Grado Superior en Marketing y Publicidad, las prácticas en Montevive.ai (una empresa de inteligencia artificial para negocios) y una serie de proyectos para comercios de Bailén y Granada que necesitaban presencia digital de verdad.</p>
+        <p data-i="about.p2">Ahora termino el BA (Hons) in Marketing en York St John University mientras investigo cómo TikTok cambia la forma en que los jóvenes descubren música. Mi objetivo: trabajar en marketing musical, entretenimiento o marcas de lujo, en equipos donde el contenido y la estrategia vayan de la mano.</p>
+        <p data-i="about.p3">Lo que me diferencia: produzco de principio a fin. Planifico el calendario, grabo, edito en CapCut, genero visuales con Midjourney o Kling AI, escribo los copies y presento el informe de resultados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="skills">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow" data-i="sk.eyebrow">Qué sé hacer</p>
+        <h2 style="margin-top:12px" data-i="sk.title">Habilidades</h2>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="sk rv"><span class="num">01</span><h3 data-i="sk.a">Estrategia y contenido</h3><ul>
+        <li data-i="sk.a1">Estrategias de redes sociales (Instagram, TikTok, Facebook)</li>
+        <li data-i="sk.a2">Calendarios editoriales y pilares de contenido</li>
+        <li data-i="sk.a3">Copywriting adaptado a cada plataforma</li>
+        <li data-i="sk.a4">Análisis de competencia y benchmarks</li>
+        <li data-i="sk.a5">Influencer marketing y campañas</li></ul></div>
+      <div class="sk rv"><span class="num">02</span><h3 data-i="sk.b">Branding e investigación</h3><ul>
+        <li data-i="sk.b1">Identidad visual, moodboards y naming</li>
+        <li data-i="sk.b2">Briefings creativos y conceptos de campaña</li>
+        <li data-i="sk.b3">Investigación comercial: cuestionarios, muestreo, análisis</li>
+        <li data-i="sk.b4">DAFO, PESTEL, marketing mix, buyer persona</li>
+        <li data-i="sk.b5">Planes de negocio y propuestas comerciales</li></ul></div>
+      <div class="sk rv"><span class="num">03</span><h3 data-i="sk.c">Producción e IA</h3><ul>
+        <li data-i="sk.c1">Grabación y edición de vídeo vertical</li>
+        <li data-i="sk.c2">Generación de imagen y vídeo con IA</li>
+        <li data-i="sk.c3">Videoclips y spots con flujo imagen → vídeo</li>
+        <li data-i="sk.c4">Automatización de procesos con n8n</li>
+        <li data-i="sk.c5">Diseño de carteles y plantillas</li></ul></div>
+    </div>
+    <div class="tools rv" id="tools"></div>
+  </div>
+</section>
+
+<section id="exp" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow" data-i="exp.eyebrow">Recorrido</p>
+        <h2 style="margin-top:12px" data-i="exp.title">Trayectoria</h2>
+      </div>
+    </div>
+    <div class="tl">
+      <div class="rv">
+        <h3 class="col" data-i="exp.work">Experiencia</h3>
+        <div class="item"><div class="when" data-i="e1.w">Mar – Jun 2025</div><div><b data-i="e1.t">Marketing y comunicación (prácticas)</b><span class="org">Montevive.ai · Granada</span><p data-i="e1.p">Empresa B2B de inteligencia artificial. Newsletters y landing pages para Kit Consulting, materiales para la Cámara de Comercio y comunicación del evento AiBirras (charlas de IA y networking).</p></div></div>
+        <div class="item"><div class="when">2026</div><div><b data-i="e2.t">Marketing (prácticas)</b><span class="org">FSI Training</span><p data-i="e2.p">Apoyo en contenido y comunicación para una empresa de formación.</p></div></div>
+        <div class="item"><div class="when">2025 – 2026</div><div><b data-i="e3.t">Social media freelance</b><span class="org">MR Barber Studio · Exporance · Beat Boutique</span><p data-i="e3.p">Estrategia, grabación, edición, copies e informes para tres negocios locales de Bailén y Granada.</p></div></div>
+        <div class="item"><div class="when">~1 <span data-i="e4.y">año</span></div><div><b data-i="e4.t">Recepción y atención al cliente</b><span class="org">Eurostars Hotels</span><p data-i="e4.p">Formación dual en gestión de alojamientos turísticos: recepción, atención al cliente y servicios de hospitalidad.</p></div></div>
+      </div>
+      <div class="rv">
+        <h3 class="col" data-i="exp.edu">Formación</h3>
+        <div class="item"><div class="when">2026 – 2027</div><div><b>BA (Hons) Marketing, Top-up</b><span class="org">York St John University · York, UK</span><p data-i="ed1.p">Último curso del grado. Investigación sobre promoción musical en TikTok y comportamiento del estudiante.</p></div></div>
+        <div class="item"><div class="when" data-i="ed2.w">Grado Superior</div><div><b data-i="ed2.t">Marketing y Publicidad</b><span class="org">C.F.I. Reina Isabel · Granada</span><p data-i="ed2.p">Investigación comercial, campañas, automatización con n8n y diseño gráfico aplicado.</p></div></div>
+        <div class="item"><div class="when" data-i="ed3.w">Grado Superior</div><div><b data-i="ed3.t">Gestión de Alojamientos Turísticos (dual)</b><span class="org">Eurostars Hotels</span><p data-i="ed3.p">Modalidad dual con formación práctica en la cadena hotelera.</p></div></div>
+        <div class="item"><div class="when" data-i="ed4.w">Idiomas</div><div><b data-i="ed4.t">Inglés B2 · Trinity College London</b><span class="org" data-i="ed4.o">Español nativo</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="contact">
+  <div class="wrap">
+    <div class="ct rv">
+      <div>
+        <h2 data-i="ct.title">¿Hablamos?</h2>
+        <p data-i="ct.p">Busco prácticas o un primer puesto junior en marketing, contenido o música. Si te encaja lo que has visto, escríbeme.</p>
+      </div>
+      <div class="list">
+        <a href="mailto:castilloanquelafrancisco@gmail.com"><span>Email</span><small>castilloanquelafrancisco@gmail.com</small></a>
+        <a href="https://www.linkedin.com/in/francisco-castillo-anquela" target="_blank" rel="noopener"><span>LinkedIn</span><small>/in/francisco-castillo-anquela</small></a>
+        <a href="cv.html" target="_blank" rel="noopener"><span data-i="ct.cv">Ver CV</span><small>EN · PDF</small></a>
+      </div>
+    </div>
+    <footer>
+      <span>© 2026 Francisco Javier Castillo Anquela</span>
+      <span data-i="ft">Hecho con criterio, café y un poco de IA.</span>
+    </footer>
+  </div>
+</section>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+/* ---------- i18n ---------- */
+const I = {
+es:{
+ "nav.work":"Proyectos","nav.about":"Sobre mí","nav.skills":"Habilidades","nav.exp":"Trayectoria","nav.contact":"Contacto",
+ "hero.eyebrow":"Marketing digital · Contenido · IA creativa","hero.l1":"Ideas que se","hero.l2":"convierten en",
+ "hero.lead":"Soy Francisco Castillo, estudiante de último curso de Marketing en York St John University y creador de estrategias de redes sociales, branding y vídeo con IA para marcas reales. De Granada a York, con la misma obsesión: que cada pieza tenga un porqué.",
+ "hero.cta1":"Ver proyectos","hero.cta2":"Hablemos",
+ "f.base":"Base","f.focus":"Foco","f.focusv":"Social media, branding, vídeo IA","f.langs":"Idiomas","f.langsv":"Español nativo · Inglés B2","f.status":"Disponible","f.statusv":"Prácticas y junior en marketing",
+ "work.eyebrow":"Trabajo seleccionado","work.title":"Proyectos","work.intro":"Propuestas para negocios reales, campañas académicas y experimentos con IA. Pulsa en cualquier ficha para ver el proceso.",
+ "about.eyebrow":"Sobre mí","about.big":"Me interesa el marketing que se puede <em>ver, medir y sentir</em>: una estrategia que acaba en contenido publicado, no en un PDF guardado.",
+ "st.1":"proyectos de marca","st.2":"negocios reales asesorados","st.3":"herramientas de IA en uso",
+ "about.p1":"Empecé en el sector hotelero con Eurostars, donde aprendí a tratar con clientes antes que a escribir copies. Después vino el Grado Superior en Marketing y Publicidad, las prácticas en Montevive.ai (una empresa de inteligencia artificial para negocios) y una serie de proyectos para comercios de Bailén y Granada que necesitaban presencia digital de verdad.",
+ "about.p2":"Ahora termino el BA (Hons) in Marketing en York St John University mientras investigo cómo TikTok cambia la forma en que los jóvenes descubren música. Mi objetivo: trabajar en marketing musical, entretenimiento o marcas de lujo, en equipos donde el contenido y la estrategia vayan de la mano.",
+ "about.p3":"Lo que me diferencia: produzco de principio a fin y domino las herramientas de IA generativa. Planifico el calendario, grabo, edito en CapCut, genero imagen y vídeo con Kling AI, Google AI Studio o PixVerse, escribo los copies y presento el informe de resultados.",
+ "sk.eyebrow":"Qué sé hacer","sk.title":"Habilidades","sk.a":"Estrategia y contenido","sk.a1":"Estrategias de redes sociales (Instagram, TikTok, Facebook)","sk.a2":"Calendarios editoriales y pilares de contenido","sk.a3":"Copywriting adaptado a cada plataforma","sk.a4":"Análisis de competencia y benchmarks","sk.a5":"Influencer marketing y campañas",
+ "sk.b":"Branding e investigación","sk.b1":"Identidad visual, moodboards y naming","sk.b2":"Briefings creativos y conceptos de campaña","sk.b3":"Investigación comercial: cuestionarios, muestreo, análisis","sk.b4":"DAFO, PESTEL, marketing mix, buyer persona","sk.b5":"Planes de negocio y propuestas comerciales",
+ "sk.c":"Producción e IA","sk.c1":"Grabación y edición de vídeo vertical","sk.c2":"Amplio dominio de IA generativa: Kling AI, Google AI Studio, PixVerse, Midjourney","sk.c3":"Videoclips y spots con flujo imagen → vídeo","sk.c4":"Automatización de procesos con n8n","sk.c5":"Diseño de carteles y plantillas",
+ "exp.eyebrow":"Recorrido","exp.title":"Trayectoria","exp.work":"Experiencia","exp.edu":"Formación",
+ "e1.w":"Mar – Jun 2025","e1.t":"Marketing y comunicación (prácticas)","e1.p":"Empresa B2B de inteligencia artificial. Newsletters y landing pages para Kit Consulting, materiales para la Cámara de Comercio y comunicación del evento AiBirras (charlas de IA y networking).",
+ "e2.t":"Marketing (prácticas)","e2.p":"Apoyo en contenido y comunicación para una empresa de formación.",
+ "e3.t":"Social media freelance","e3.p":"Estrategia, grabación, edición, copies e informes para tres negocios locales de Bailén y Granada.",
+ "e4.y":"año","e4.t":"Recepción y atención al cliente","e4.p":"Formación dual en gestión de alojamientos turísticos: recepción, atención al cliente y servicios de hospitalidad.",
+ "ed1.p":"Último curso del grado. Investigación sobre promoción musical en TikTok y comportamiento del estudiante.",
+ "ed2.w":"Grado Superior","ed2.t":"Marketing y Publicidad","ed2.p":"Investigación comercial, campañas, automatización con n8n y diseño gráfico aplicado.",
+ "ed3.w":"Grado Superior","ed3.t":"Gestión de Alojamientos Turísticos (dual)","ed3.p":"Modalidad dual con formación práctica en la cadena hotelera.",
+ "ed4.w":"Idiomas","ed4.t":"Inglés B2 · Trinity College London","ed4.o":"Español nativo",
+ "ct.title":"¿Hablamos?","ct.p":"Busco prácticas o un primer puesto junior en marketing, contenido o música. Si te encaja lo que has visto, escríbeme.","ct.cv":"Ver CV",
+ "ft":"Hecho con criterio, café y un poco de IA.",
+ "all":"Todos","open":"Ver proceso","m.video":"Ver vídeo en YouTube","watch":"Ver vídeo","m.challenge":"Reto","m.did":"Qué hice","m.tools":"Herramientas","m.note":"Material completo (PDF, vídeo) disponible bajo petición.",
+ rot:["contenido","estrategia","marca","vídeo","comunidad"]
+},
+en:{
+ "nav.work":"Work","nav.about":"About","nav.skills":"Skills","nav.exp":"Background","nav.contact":"Contact",
+ "hero.eyebrow":"Digital marketing · Content · Creative AI","hero.l1":"Ideas that","hero.l2":"turn into",
+ "hero.lead":"I'm Francisco Castillo, a final-year Marketing student at York St John University who builds social media strategies, branding and AI-generated video for real brands. From Granada to York, with one obsession: every piece needs a reason to exist.",
+ "hero.cta1":"See work","hero.cta2":"Get in touch",
+ "f.base":"Based in","f.focus":"Focus","f.focusv":"Social media, branding, AI video","f.langs":"Languages","f.langsv":"Native Spanish · English B2","f.status":"Open to","f.statusv":"Marketing placements and junior roles",
+ "work.eyebrow":"Selected work","work.title":"Projects","work.intro":"Proposals for real businesses, academic campaigns and AI experiments. Click any card to see the process.",
+ "about.eyebrow":"About","about.big":"I care about marketing you can <em>see, measure and feel</em>: a strategy that ends up as published content, not as a PDF in a folder.",
+ "st.1":"brand projects","st.2":"real businesses advised","st.3":"AI tools in daily use",
+ "about.p1":"I started in hospitality with Eurostars Hotels, where I learnt to deal with customers before I learnt to write copy. Then came a Higher Diploma in Marketing and Advertising, a placement at Montevive.ai (a B2B artificial intelligence company) and a run of projects for shops in Bailén and Granada that needed a real digital presence.",
+ "about.p2":"I'm now finishing my BA (Hons) in Marketing at York St John University while researching how TikTok changes the way young people discover music. My goal: to work in music marketing, entertainment or luxury brands, in teams where content and strategy go hand in hand.",
+ "about.p3":"What sets me apart: I produce end to end and I'm fluent in generative AI tools. I plan the calendar, shoot, edit in CapCut, generate image and video with Kling AI, Google AI Studio or PixVerse, write the copy and present the results report.",
+ "sk.eyebrow":"What I do","sk.title":"Skills","sk.a":"Strategy and content","sk.a1":"Social media strategy (Instagram, TikTok, Facebook)","sk.a2":"Editorial calendars and content pillars","sk.a3":"Platform-specific copywriting","sk.a4":"Competitor analysis and benchmarks","sk.a5":"Influencer marketing and campaigns",
+ "sk.b":"Branding and research","sk.b1":"Visual identity, moodboards and naming","sk.b2":"Creative briefs and campaign concepts","sk.b3":"Market research: questionnaires, sampling, analysis","sk.b4":"SWOT, PESTEL, marketing mix, buyer persona","sk.b5":"Business plans and commercial proposals",
+ "sk.c":"Production and AI","sk.c1":"Shooting and editing vertical video","sk.c2":"Strong command of generative AI: Kling AI, Google AI Studio, PixVerse, Midjourney","sk.c3":"Music videos and spots with image → video workflows","sk.c4":"Process automation with n8n","sk.c5":"Poster and template design",
+ "exp.eyebrow":"Journey","exp.title":"Background","exp.work":"Experience","exp.edu":"Education",
+ "e1.w":"Mar – Jun 2025","e1.t":"Marketing and communications (placement)","e1.p":"B2B artificial intelligence company. Newsletters and landing pages for Kit Consulting, materials for the Chamber of Commerce and communications for AiBirras (AI talks and networking).",
+ "e2.t":"Marketing (placement)","e2.p":"Content and communications support for a training company.",
+ "e3.t":"Freelance social media","e3.p":"Strategy, filming, editing, copy and reporting for three local businesses in Bailén and Granada.",
+ "e4.y":"year","e4.t":"Reception and customer service","e4.p":"Dual training in tourist accommodation management: front desk, customer service and hospitality.",
+ "ed1.p":"Final year of the degree. Research on music promotion on TikTok and student behaviour.",
+ "ed2.w":"Higher Diploma","ed2.t":"Marketing and Advertising","ed2.p":"Market research, campaigns, n8n automation and applied graphic design.",
+ "ed3.w":"Higher Diploma","ed3.t":"Tourist Accommodation Management (dual)","ed3.p":"Dual route with hands-on training at the hotel chain.",
+ "ed4.w":"Languages","ed4.t":"English B2 · Trinity College London","ed4.o":"Native Spanish",
+ "ct.title":"Let's talk","ct.p":"I'm looking for a placement or a first junior role in marketing, content or music. If what you've seen fits, drop me a line.","ct.cv":"View CV",
+ "ft":"Made with judgement, coffee and a little AI.",
+ "all":"All","open":"See process","m.video":"Watch on YouTube","watch":"Watch video","m.challenge":"Challenge","m.did":"What I did","m.tools":"Tools","m.note":"Full material (PDF, video) available on request.",
+ rot:["content","strategy","brand","video","community"]
+}};
+
+/* ---------- Projects ---------- */
+const CATS = {es:{social:"Social media",brand:"Branding",research:"Investigación",ai:"IA & vídeo",auto:"Automatización",campaign:"Campañas"},
+              en:{social:"Social media",brand:"Branding",research:"Research",ai:"AI & video",auto:"Automation",campaign:"Campaigns"}};
+const P = [
+ {id:"mrbarber",cat:"social",wide:true,h:["#ffd36b","#2437f2"],mark:"MR Barber Studio",
+  es:{t:"Estrategia de RRSS para MR Barber Studio",s:"Propuesta comercial para una barbería de Bailén: de 560 seguidores y 20 likes por vídeo a una marca reconocible.",
+      ch:"La barbería con menos seguidores de Bailén. Sin cuenta de empresa en TikTok, vídeos que solo mostraban cortes y una competencia (Duve) con diez veces más audiencia gracias a su marca personal.",
+      did:["Benchmark de cinco barberías de la zona y lectura de sus datos","Diagnóstico de Instagram y TikTok con métricas reales de la cuenta","Tres pilares de contenido: Transformaciones 40 %, Trabajo profesional 30 %, Marca personal 30 %","Calendario: 3 posts semanales por red (L, X, V) y stories diarias","Sistema de grabación: una visita semanal de 1-2 h que alimenta toda la semana","Propuesta económica cerrada de 250 €/mes con informe de resultados"],
+      kp:[["560","seguidores de partida"],["40/30/30","mix de contenido"],["3+3","posts semanales"]]},
+  en:{t:"Social media strategy for MR Barber Studio",s:"Commercial proposal for a barbershop in Bailén: from 560 followers and 20 likes per video to a recognisable brand.",
+      ch:"The least-followed barbershop in town. No TikTok business account, videos that only showed haircuts, and a competitor (Duve) with ten times the audience thanks to personal branding.",
+      did:["Benchmark of five local barbershops and their numbers","Instagram and TikTok audit with the account's real metrics","Three content pillars: Transformations 40%, Professional work 30%, Personal brand 30%","Calendar: 3 posts a week per platform (Mon, Wed, Fri) plus daily stories","Shooting system: one 1-2 h weekly visit that feeds the whole week","Closed €250/month offer including a results report"],
+      kp:[["560","starting followers"],["40/30/30","content mix"],["3+3","weekly posts"]]},
+  tools:["Instagram","TikTok","CapCut","Canva"]},
+ {id:"swarovski",cat:"research",h:["#f1d9ff","#c9d7ff"],mark:"Swarovski × TikTok",
+  es:{t:"Investigación TikTok y briefing creativo para Swarovski",s:"Análisis de los anuncios más vistos de la marca y propuesta de campaña: «Brilla con tu historia».",
+      ch:"Swarovski proyecta lujo y exclusividad, pero con un tono frío. Había espacio para una campaña que humanizara la marca y la conectara emocionalmente con mujeres de 20 a 40 años.",
+      did:["Análisis de tres anuncios de TikTok (estilo, público, CTA y resultados: 300 k, 20 M y una edición limitada navideña)","Briefing creativo con objetivos, audiencia, mensaje y tono visual cinemático","Tres guiones de vídeo: «De rutina a ritual», «Lo que no se ve también brilla» y «Tu primer cristal»","Hashtag de campaña #BrillaConTuHistoria y cierres de texto en pantalla"],
+      kp:[["3","anuncios analizados"],["20 M","visitas del mejor anuncio"],["3","guiones propuestos"]]},
+  en:{t:"TikTok research and creative brief for Swarovski",s:"Analysis of the brand's best-performing ads and a campaign proposal: “Shine with your story”.",
+      ch:"Swarovski projects luxury and exclusivity, but in a cold tone. There was room for a campaign that humanised the brand and built an emotional link with women aged 20 to 40.",
+      did:["Analysis of three TikTok ads (style, audience, CTA and results: 300k, 20M and a limited Christmas edition)","Creative brief with objectives, audience, message and cinematic visual tone","Three video scripts: “From routine to ritual”, “What you can't see also shines” and “Your first crystal”","Campaign hashtag and on-screen closing lines"],
+      kp:[["3","ads analysed"],["20M","views on top ad"],["3","scripts proposed"]]},
+  tools:["TikTok","Briefing","Storytelling"]},
+ {id:"charty",cat:"brand",h:["#b8f5d0","#2437f2"],mark:"charty",
+  es:{t:"Charty: streaming musical con impacto social",s:"Concepto de app donde cada reproducción genera puntos que se convierten en donaciones a causas sociales.",
+      ch:"Crear una marca desde cero en un mercado dominado por Spotify, encontrando una propuesta de valor que nadie ofrece.",
+      did:["Propuesta de valor: única plataforma que une música, impacto social y ambiental","Misión, visión y valores; DAFO; público objetivo 18-60 años","Buyer persona (Javier y María) y marketing mix completo","Modelo de precio: 1 reproducción = 10 puntos = 0,005 €; versión Premium","Distribución móvil y escritorio; comunicación en Instagram, TikTok y Facebook"],
+      kp:[["10 pts","por reproducción"],["4 P","marketing mix"],["2","buyer personas"]]},
+  en:{t:"Charty: music streaming with social impact",s:"App concept where every play earns points that turn into donations to social causes.",
+      ch:"Build a brand from scratch in a market owned by Spotify, with a value proposition nobody else offers.",
+      did:["Value proposition: the only platform joining music, social and environmental impact","Mission, vision and values; SWOT; target audience 18-60","Buyer personas (Javier and María) and full marketing mix","Pricing model: 1 play = 10 points = €0.005; Premium tier","Mobile and desktop distribution; comms on Instagram, TikTok and Facebook"],
+      kp:[["10 pts","per play"],["4 Ps","marketing mix"],["2","buyer personas"]]},
+  tools:["Branding","Canva","Business model"]},
+ {id:"n8n",cat:"auto",h:["#ffb4a2","#2437f2"],mark:"Workflow n8n",
+  es:{t:"Automatización de solicitudes de servicio con n8n",s:"Workflow que registra, valida y responde leads de un formulario sin intervención manual.",
+      ch:"Una agencia de servicios recibe solicitudes por Google Forms y necesita centralizarlas, priorizarlas y contestar al instante.",
+      did:["Disparador: nueva fila en Google Sheets desde el formulario","Nodo Set para limpiar y estructurar los datos","Nodo IF que valida la solicitud y detiene el flujo si hay errores","Hoja interna de registro y email automático al cliente","Notificación interna al equipo con cada nuevo lead"],
+      kp:[["6","nodos"],["0","intervención manual"],["1","formulario conectado"]]},
+  en:{t:"Service-request automation with n8n",s:"Workflow that logs, validates and answers leads from a form with no manual work.",
+      ch:"A services agency receives requests via Google Forms and needs to centralise, prioritise and reply instantly.",
+      did:["Trigger: new row in Google Sheets from the form","Set node to clean and structure the data","IF node that validates the request and halts the flow on errors","Internal log sheet and automatic email to the client","Internal notification to the team on every new lead"],
+      kp:[["6","nodes"],["0","manual steps"],["1","connected form"]]},
+  tools:["n8n","Google Sheets","Google Forms","Email"]},
+ {id:"spot",cat:"ai",h:["#2437f2","#ffd36b"],mark:"Spot · OpenAI",
+  es:{t:"Spot publicitario para OpenAI generado con IA",s:"Anuncio académico producido íntegramente con herramientas de IA generativa y montaje propio.",
+      ch:"Producir un spot con calidad de anuncio para una marca tecnológica sin rodaje ni equipo, controlando ritmo, estética y mensaje de principio a fin.",
+      did:["Concepto, guion y storyboard por planos","Generación de imágenes y clips de vídeo con Kling AI, Google AI Studio y PixVerse","Iteración de prompts para mantener coherencia visual entre escenas","Montaje, ritmo, sonorización y rotulación final en edición"],
+      kp:[["3","herramientas de IA"],["100 %","generado con IA"],["1","spot final"]]},
+  en:{t:"AI-generated advertising spot for OpenAI",s:"Academic ad produced entirely with generative AI tools and a hand-cut edit.",
+      ch:"Produce an ad-quality spot for a tech brand without a shoot or crew, keeping control of pace, look and message from start to finish.",
+      did:["Concept, script and shot-by-shot storyboard","Image and video clip generation with Kling AI, Google AI Studio and PixVerse","Prompt iteration to keep visual consistency across scenes","Edit, pacing, sound design and final titles"],
+      kp:[["3","AI tools"],["100%","AI-generated"],["1","final spot"]]},
+  tools:["Kling AI","Google AI Studio","PixVerse","CapCut"],link:"https://youtu.be/3VWpYqEzohw"},
+ {id:"videoclip",cat:"ai",h:["#c9d7ff","#0d1117"],mark:"Sexo, violencia y llantas",
+  es:{t:"Videoclip «Sexo, violencia y llantas» con IA generativa",s:"Videoclip narrativo construido escena a escena con vídeo generativo, siguiendo la letra y el ritmo de la canción.",
+      ch:"Contar una historia visual que acompañe la canción manteniendo coherencia de personaje, luz y estética entre clips generados por distintas herramientas.",
+      did:["Desglose de la letra en escenas y prompts por plano","Generación de clips con Kling AI, Google AI Studio y PixVerse","Selección de tomas y continuidad visual entre herramientas","Edición final al ritmo de la música, bandas cinematográficas y corrección de color"],
+      kp:[["3","herramientas de IA"],["Escena a escena","método"],["1","videoclip"]]},
+  en:{t:"“Sexo, violencia y llantas” music video with generative AI",s:"Narrative music video built scene by scene with generative video, following the lyrics and rhythm of the song.",
+      ch:"Tell a visual story that follows the song while keeping character, lighting and look consistent across clips from different tools.",
+      did:["Lyrics broken into scenes and per-shot prompts","Clip generation with Kling AI, Google AI Studio and PixVerse","Shot selection and visual continuity across tools","Final edit cut to the music, cinematic bars and colour grading"],
+      kp:[["3","AI tools"],["Scene by scene","method"],["1","music video"]]},
+  tools:["Kling AI","Google AI Studio","PixVerse","CapCut"],link:"https://youtu.be/FMwu3V-Ades"},
+ {id:"poster",cat:"research",h:["#2437f2","#f1d9ff"],mark:"Beyond the viral sound",
+  es:{t:"Propuesta de investigación: TikTok y cómo escuchan música los universitarios",s:"Póster académico (BMR6001M) que plantea una disertación cualitativa sobre cómo TikTok moldea qué y cómo escuchan música los estudiantes universitarios en el Reino Unido.",
+      ch:"La investigación existente se centra en artistas, discográficas y charts; falta la voz del consumidor joven. ¿La promoción en TikTok se queda en el clip o lleva a escuchar la canción completa?",
+      did:["Pregunta central y tres subpreguntas: cómo escuchan (clips vs. canciones), cómo influye la popularidad visible y qué hacen después (stream, guardar, compartir)","Revisión de literatura: platformificación y «microsongs», influencia social en mercados musicales y evidencia desigual del efecto de TikTok en el streaming","Diseño cualitativo con datos primarios, ética de la investigación y criterios de fiabilidad (Lincoln y Guba)","Cronograma de noviembre de 2026 a mayo de 2027 con hitos de aprobación ética, recogida y análisis"],
+      kp:[["3","subpreguntas"],["Cualitativa","metodología"],["2026–27","cronograma"]]},
+  en:{t:"Research proposal: TikTok and how university students listen to music",s:"Academic poster (BMR6001M) proposing a qualitative dissertation on how TikTok shapes what and how UK university students listen to music.",
+      ch:"Existing research privileges artists, labels and charts; young consumers' own accounts are missing. Does TikTok promotion stop at the clip or lead to the full song?",
+      did:["Central question and three sub-questions: how students listen (clips vs. full songs), how visible popularity influences them, and what they do next (stream, save, share)","Scoping literature review: platformification and 'microsongs', social influence in music markets, uneven evidence on TikTok's streaming effect","Qualitative primary-data design, research ethics and trustworthiness criteria (Lincoln and Guba)","Timeline from November 2026 to May 2027 with ethics approval, data collection and analysis milestones"],
+      kp:[["3","sub-questions"],["Qualitative","method"],["2026–27","timeline"]]},
+  tools:["Research design","Literature review","Harvard referencing"]},
+ {id:"reina",cat:"research",h:["#e3e6eb","#2437f2"],mark:"Satisfacción del alumnado",
+  es:{t:"Análisis de satisfacción del alumnado del C.F.I. Reina Isabel",s:"Investigación comercial descriptiva con cuestionario a 90-100 estudiantes y análisis de correlaciones.",
+      ch:"Identificar qué factores pesan más en la satisfacción del alumnado y proponer mejoras accionables para el centro.",
+      did:["Cuestionario mixto (Likert, opción múltiple, ranking) en Google Forms","Siete hipótesis sobre docencia, contenidos, administración e instalaciones","Análisis de correlaciones: atención administrativa y equipamiento, los factores más determinantes","Seis recomendaciones de mejora y plan de trabajo en cinco semanas","Trabajo en equipo de cuatro personas"],
+      kp:[["90-100","estudiantes"],["7","hipótesis"],["6","recomendaciones"]]},
+  en:{t:"Student satisfaction study, C.F.I. Reina Isabel",s:"Descriptive market research with a 90-100 student questionnaire and correlation analysis.",
+      ch:"Identify which factors weigh most on student satisfaction and propose actionable improvements for the college.",
+      did:["Mixed questionnaire (Likert, multiple choice, ranking) on Google Forms","Seven hypotheses on teaching, content, administration and facilities","Correlation analysis: admin service and equipment proved the strongest drivers","Six improvement recommendations and a five-week work plan","Four-person team project"],
+      kp:[["90-100","students"],["7","hypotheses"],["6","recommendations"]]},
+  tools:["Google Forms","Análisis de datos","Canva"]},
+ {id:"movilidad",cat:"campaign",h:["#b8f5d0","#ffd36b"],mark:"Muévete Granada",
+  es:{t:"Campaña institucional de movilidad sostenible",s:"Cartel y posts para animar a los jóvenes de Granada a usar transporte público, bici o ir a pie.",
+      ch:"Reducir el uso del coche privado en una ciudad universitaria con un mensaje que funcione tanto en un andén de metro como en el feed.",
+      did:["Concepto y cartel institucional","Adaptación a posts para redes orientados a público joven","Mockup de la pieza en una parada subterránea de metro"],
+      kp:[["1","cartel"],["3","soportes"],["Granada","ciudad"]]},
+  en:{t:"Institutional campaign for sustainable mobility",s:"Poster and social posts encouraging young people in Granada to use public transport, cycle or walk.",
+      ch:"Reduce private car use in a university city with a message that works on a metro platform and in the feed.",
+      did:["Concept and institutional poster","Social post adaptations aimed at a young audience","Mockup of the piece in an underground metro stop"],
+      kp:[["1","poster"],["3","formats"],["Granada","city"]]},
+  tools:["Canva","Diseño gráfico","Mockups"]},
+ {id:"exporance",cat:"social",h:["#c9d7ff","#e3e6eb"],mark:"Exporance",
+  es:{t:"Marketing digital para Exporance",s:"Tienda de baños en Bailén sin web: calendario de contenidos y sesión de fotos y vídeo en tienda.",
+      ch:"Dar presencia digital a un negocio físico de reformas de baño, hablando a particulares que reforman y a constructoras.",
+      did:["Definición de público y tono aspiracional-profesional","Visita a tienda para grabar producto, obras y proyectos","Calendario con copies, fechas y horas para Instagram, Facebook y TikTok"],
+      kp:[["3","redes"],["1","sesión en tienda"],["B2C+B2B","públicos"]]},
+  en:{t:"Digital marketing for Exporance",s:"A bathroom showroom in Bailén with no website: content calendar plus an in-store photo and video shoot.",
+      ch:"Give a physical bathroom-renovation business a digital presence that speaks to homeowners and building firms alike.",
+      did:["Audience definition and an aspirational-professional tone","In-store shoot of products, works and finished projects","Calendar with copy, dates and times for Instagram, Facebook and TikTok"],
+      kp:[["3","platforms"],["1","in-store shoot"],["B2C+B2B","audiences"]]},
+  tools:["Instagram","TikTok","Facebook","CapCut"]},
+ {id:"beat",cat:"social",h:["#ffb4a2","#0d1117"],mark:"Beat Boutique",
+  es:{t:"Estrategia social para Beat Boutique",s:"Estudio de producción musical en Granada especializado en artistas emergentes.",
+      ch:"Convertir un estudio con buen producto en una comunidad de artistas que lo recomiende y reserve.",
+      did:["Objetivos: alcance, engagement, reconocimiento, leads y atención al cliente","Estrategia diferenciada para Instagram, TikTok y Facebook","Ideas de contenido alrededor del proceso creativo y los artistas"],
+      kp:[["5","objetivos"],["3","redes"],["Granada","estudio"]]},
+  en:{t:"Social strategy for Beat Boutique",s:"Music production studio in Granada specialising in emerging artists.",
+      ch:"Turn a studio with a good product into a community of artists who recommend and book it.",
+      did:["Objectives: reach, engagement, awareness, leads and customer service","Platform-specific strategy for Instagram, TikTok and Facebook","Content ideas built around the creative process and the artists"],
+      kp:[["5","objectives"],["3","platforms"],["Granada","studio"]]},
+  tools:["Instagram","TikTok","Facebook"]},
+ {id:"sandungueo",cat:"brand",h:["#ffd36b","#ffb4a2"],mark:"Sandungueo Beach Club",
+  es:{t:"Sandungueo Beach Club: plan de negocio",s:"Beach club y discoteca en la playa de Fuengirola, de la idea al precio de cada cóctel.",
+      ch:"Diseñar un negocio de ocio completo y defendible: identidad, análisis de entorno, oferta y responsabilidad social.",
+      did:["Naming e identidad visual en naranja, dorado y blanco","PESTEL, DAFO y marketing mix","Carta, stock, proveedores y política de precios","RSC: limpiezas de playa y sustitución del plástico por cartón","Estrategia de distribución, eventos y comunicación"],
+      kp:[["Fuengirola","ubicación"],["PESTEL+DAFO","análisis"],["RSC","incluida"]]},
+  en:{t:"Sandungueo Beach Club: business plan",s:"Beach club and nightclub on Fuengirola beach, from the idea to the price of each cocktail.",
+      ch:"Design a complete, defensible leisure business: identity, environment analysis, offer and social responsibility.",
+      did:["Naming and visual identity in orange, gold and white","PESTEL, SWOT and marketing mix","Menu, stock, suppliers and pricing policy","CSR: beach clean-ups and swapping plastic for cardboard cups","Distribution, events and communication strategy"],
+      kp:[["Fuengirola","location"],["PESTEL+SWOT","analysis"],["CSR","included"]]},
+  tools:["Business plan","Branding","Pricing"]},
+ {id:"bancy",cat:"campaign",h:["#f1d9ff","#b8f5d0"],mark:"Bancy Education",
+  es:{t:"Plan de marketing para Bancy Education",s:"Campaña para crecer en redes entre estudiantes españoles, con influencer y programa de becas.",
+      ch:"Posicionar una marca educativa ante estudiantes españoles que quieren formarse en inglés, con presupuesto y calendario cerrados.",
+      did:["Business challenge, concepto de campaña y dirección creativa","Selección de influencer: Maria Speaks English frente a dos alternativas, por su puente bilingüe","Concepto de becas: cinco plazas para personas con pocos recursos","Plan de contenidos y distribución, stakeholders, presupuesto, timeline y KPIs"],
+      kp:[["5","becas"],["1","influencer"],["9","secciones del plan"]]},
+  en:{t:"Marketing plan for Bancy Education",s:"Campaign to grow on social among Spanish students, with an influencer and a scholarship programme.",
+      ch:"Position an education brand with Spanish students who want to study in English, on a fixed budget and timeline.",
+      did:["Business challenge, campaign concept and creative direction","Influencer choice: Maria Speaks English over two alternatives, for her bilingual bridge","Scholarship concept: five places for people with limited means","Content and distribution plan, stakeholders, budget, timeline and KPIs"],
+      kp:[["5","scholarships"],["1","influencer"],["9","plan sections"]]},
+  tools:["Influencer marketing","Content plan","KPIs"]},
+ {id:"cartel",cat:"campaign",h:["#ffb4a2","#ffd36b"],mark:"Fire Artist Surrealism",
+  es:{t:"Cartel «Fire Artist Surrealism»",s:"Pieza gráfica de evento con estética surrealista y tipografía como protagonista.",
+      ch:"Resolver un cartel con una sola idea visual fuerte que funcione impreso y en stories.",
+      did:["Concepto y composición","Jerarquía tipográfica y paleta","Exportación para impresión y formatos verticales"],
+      kp:[["1","idea"],["2","formatos"],["Tipografía","protagonista"]]},
+  en:{t:"“Fire Artist Surrealism” poster",s:"Event artwork with a surrealist look and typography as the lead.",
+      ch:"Solve a poster with one strong visual idea that works in print and in stories.",
+      did:["Concept and composition","Type hierarchy and palette","Export for print and vertical formats"],
+      kp:[["1","idea"],["2","formats"],["Type","as the hero"]]},
+  tools:["Canva","Midjourney","Diseño gráfico"]},
+ {id:"granada",cat:"brand",h:["#e3e6eb","#ffb4a2"],mark:"Leyendas de Granada · Lyric Bar",
+  es:{t:"Marcas pequeñas, ideas grandes",s:"Lyric Bar (pub de cócteles en burdeos y negro), Leyendas de Granada (blog de mitos e historias) y RinconesdeGranada.",
+      ch:"Ejercicios de branding rápido: dar nombre, voz y sistema visual a conceptos locales con muy pocos recursos.",
+      did:["Lyric Bar: concepto de marca y moodboard","Leyendas de Granada: identidad visual, análisis de competencia y arquitectura de contenidos (Leyendas y mitos, Crímenes y misterios, Rutas míticas, Historias de la comunidad)","RinconesdeGranada: promoción de lugares y puntos de interés","Brillo Eterno: idea de negocio y posicionamiento para una marca de joyería"],
+      kp:[["4","marcas"],["Granada","origen"],["Moodboards","+ identidad"]]},
+  en:{t:"Small brands, big ideas",s:"Lyric Bar (a burgundy-and-black cocktail pub), Leyendas de Granada (a blog of myths and stories) and RinconesdeGranada.",
+      ch:"Fast branding exercises: give a name, voice and visual system to local concepts with very few resources.",
+      did:["Lyric Bar: brand concept and moodboard","Leyendas de Granada: visual identity, competitor analysis and content architecture","RinconesdeGranada: promotion of places and points of interest","Brillo Eterno: business idea and positioning for a jewellery brand"],
+      kp:[["4","brands"],["Granada","origin"],["Moodboards","+ identity"]]},
+  tools:["Branding","Canva","Moodboards"]}
+];
+
+const TOOLS=[["Canva"],["CapCut"],["Kling AI",1],["Google AI Studio",1],["PixVerse",1],["Midjourney",1],["Runway",1],["Leonardo AI",1],["ChatGPT",1],["Claude",1],["Gemini",1],["n8n"],["Google Forms"],["Google Sheets"],["Instagram"],["TikTok"],["Meta Business"]];
+const MQ=["Social media strategy","Branding","Content calendars","AI video","Copywriting","Market research","Influencer marketing","n8n automation","Music marketing","Campaign planning"];
+
+/* ---------- State ---------- */
+let lang="es", filter="all";
+const $=s=>document.querySelector(s);
+const t=k=>I[lang][k];
+
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i]").forEach(el=>{const v=t(el.dataset.i); if(v!==undefined) el.innerHTML=v;});
+  $("#lang").innerHTML = lang==="es" ? 'ES / <span style="opacity:.5">EN</span>' : '<span style="opacity:.5">ES</span> / EN';
+  renderFilters(); renderGrid();
+}
+function renderFilters(){
+  const f=$("#filters"); f.innerHTML="";
+  const mk=(k,label)=>{const b=document.createElement("button");b.className="pill"+(filter===k?" on":"");b.textContent=label;b.onclick=()=>{filter=k;renderFilters();renderGrid();};f.appendChild(b);};
+  mk("all",t("all")); Object.entries(CATS[lang]).forEach(([k,v])=>mk(k,v));
+}
+function renderGrid(){
+  const g=$("#grid"); g.innerHTML="";
+  P.forEach((p,i)=>{
+    const d=p[lang];
+    const c=document.createElement("button");
+    c.className="card"+(p.wide?" wide":"")+((filter!=="all"&&p.cat!==filter)?" hide":"");
+    c.style.setProperty("--h1",p.h[0]); c.style.setProperty("--h2",p.h[1]);
+    c.innerHTML=`<div class="thumb"><span class="tag${p.cat==="ai"?" ai":""}">${CATS[lang][p.cat]}</span><span class="big">${String(i+1).padStart(2,"0")}</span><span class="mark">${p.mark}</span></div>
+      <div class="body"><h3>${d.t}</h3><p>${d.s}</p><div class="meta"><span>${p.tools.slice(0,2).join(" · ")}</span><span class="open">${p.link?t("watch"):t("open")}</span></div></div>`;
+    c.onclick=()=>openModal(p);
+    g.appendChild(c);
+  });
+}
+function openModal(p){
+  const d=p[lang];
+  $("#sheet").innerHTML=`<button class="x" id="x" aria-label="Cerrar">×</button>
+    <p class="eyebrow">${CATS[lang][p.cat]}</p><h3>${d.t}</h3><p class="sub">${d.s}</p>
+    <div class="kpis">${d.kp.map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1]}</span></div>`).join("")}</div>
+    <div class="cols"><div><h4>${t("m.challenge")}</h4><p style="margin-bottom:22px;font-size:15px">${d.ch}</p><h4>${t("m.did")}</h4><ul>${d.did.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    <div><h4>${t("m.tools")}</h4><div class="chips">${p.tools.map(x=>`<span class="chip">${x}</span>`).join("")}</div>
+    ${p.link?`<a class="btn primary" style="margin-top:22px" href="${p.link}" target="_blank" rel="noopener"><span>${t("m.video")}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`:`<div class="note">${t("m.note")}</div>`}</div></div>`;
+  $("#modal").classList.add("open"); document.body.style.overflow="hidden";
+  $("#x").onclick=closeModal;
+}
+function closeModal(){$("#modal").classList.remove("open");document.body.style.overflow="";}
+$("#scrim").onclick=closeModal;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+/* Theme */
+const root=document.documentElement;
+try{const s=localStorage.getItem("fc-theme"); if(s) root.dataset.theme=s;}catch(e){}
+$("#theme").onclick=()=>{
+  const dark = root.dataset.theme ? root.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try{localStorage.setItem("fc-theme",root.dataset.theme);}catch(e){}
+};
+/* Lang */
+try{const l=localStorage.getItem("fc-lang"); if(l==="en"||l==="es") lang=l;}catch(e){}
+$("#lang").onclick=()=>{lang=lang==="es"?"en":"es";try{localStorage.setItem("fc-lang",lang);}catch(e){}applyLang();};
+
+/* Rotating word */
+let ri=0;
+setInterval(()=>{const w=t("rot");ri=(ri+1)%w.length;$("#rot").innerHTML=`<span>${w[ri]}</span>`;},2400);
+
+/* Marquee + tools */
+$("#track").innerHTML=[...MQ,...MQ].map(x=>`<span>${x}</span>`).join("");
+$("#tools").innerHTML=TOOLS.map(([n,ai])=>`<span class="tool${ai?" ai":""}">${n}</span>`).join("");
+
+/* Reveal + counters */
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(!reduce && "IntersectionObserver" in window){
+  const els=[...document.querySelectorAll(".rv")];
+  els.forEach(el=>{ if(el.getBoundingClientRect().top>innerHeight) el.classList.add("pre"); });
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove("pre");io.unobserve(e.target);}}),{threshold:.12});
+  els.forEach(el=>io.observe(el));
+}
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,n=+el.dataset.count;let s=0;const st=performance.now();
+  (function f(now){const p=Math.min(1,(now-st)/900);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f);})(st);cio.unobserve(el);}),{threshold:.5});
+document.querySelectorAll("[data-count]").forEach(el=>cio.observe(el));
+
+applyLang();
+</script>
+</body>
+</html>
